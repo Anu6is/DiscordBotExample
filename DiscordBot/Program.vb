@@ -1,4 +1,3 @@
-
 Imports System.IO
 Imports System.Reflection
 Imports System.Threading
@@ -25,10 +24,10 @@ Module Program
         _config = BuildConfig()
 
         'Set up your Dependency Injection Container
-        Await AddServices()
+        AddServices()
 
         'Subscribe to desired events
-        Await AttachHandlers()
+        AttachHandlers()
 
         'Load commands and modules into the command service
         Await _commands.AddModulesAsync(Assembly.GetEntryAssembly())
@@ -40,7 +39,7 @@ Module Program
         Await Task.Delay(Timeout.Infinite)
     End Function
 
-    Private Function AddServices() As Task
+    Private Sub AddServices()
         Dim collection As New ServiceCollection()
 
         'Basic services
@@ -53,18 +52,14 @@ Module Program
         'All additional services should be added before building
 
         _services = collection.BuildServiceProvider()
+    End Sub
 
-        Return Task.CompletedTask
-    End Function
-
-    Private Function AttachHandlers() As Task
+    Private Sub AttachHandlers()
         AddHandler _client.Log, AddressOf Logger
         AddHandler _commands.Log, AddressOf Logger
 
         AddHandler _client.MessageReceived, AddressOf CommandHandler
-
-        Return Task.CompletedTask
-    End Function
+    End Sub
 
     Private Async Function CommandHandler(ByVal message As SocketMessage) As Task
         Dim userMessage As SocketUserMessage = TryCast(message, SocketUserMessage)
