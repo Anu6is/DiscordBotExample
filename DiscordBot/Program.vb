@@ -30,8 +30,8 @@ Module Program
         'Subscribe to desired events
         AddHandlers()
 
-        'Load command modules into the command service
-        'If you are not using an IService provider, Nothing can be passed in place of Services
+        'Load command modules into the command service. Any Class that inherits from ModuleBase is loaded
+        'If you are not using an IServiceProvider, 'Nothing' can be passed in place of Services
         Await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services)
 
         Await _client.LoginAsync(TokenType.Bot, _config("token")) 'A valid token must exist in config.json
@@ -49,7 +49,7 @@ Module Program
         collection.AddSingleton(_commands)
 
         'Additional services and dependencies that you may require
-        collection.AddSingleton(_config)
+        collection.AddSingleton(_config) 'This is not necessary, it's just an example. 
 
         'All additional services should be added above before building
         _services = collection.BuildServiceProvider()
@@ -67,12 +67,13 @@ Module Program
         'Ignore non user messages 
         If userMessage Is Nothing OrElse userMessage.Author.IsBot Then Return
 
-        Dim pos As Integer = 0
-
         'Create the command context
         Dim context As New SocketCommandContext(_client, userMessage)
 
-        'This is where you set your command prefix. This can be hard coded or made configurable.
+        Dim pos As Integer = 0 'This is used to find the starting position of the command (all text after the command prefix)
+
+        'This is where you set your command prefix. 
+        'This can be hard coded Or made configurable.
         'HasCharPrefix - checks to see if the message begins with a predefined Character
         'HasStringPrefix - checks to see if the message begins with a predefined String
         'HasMentionPrefix - checks to see if the message begins with a predefined user Mention
