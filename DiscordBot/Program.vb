@@ -28,10 +28,10 @@ Module Program
         AddServices()
 
         'Subscribe to desired events
-        AttachHandlers()
+        AddHandlers()
 
         'Load commands and modules into the command service
-        Await _commands.AddModulesAsync(Assembly.GetEntryAssembly())
+        Await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services)
 
         Await _client.LoginAsync(TokenType.Bot, _config("token")) 'A valid token must exist in config.json
         Await _client.StartAsync()
@@ -55,10 +55,9 @@ Module Program
         _services = collection.BuildServiceProvider()
     End Sub
 
-    Private Sub AttachHandlers()
+    Private Sub AddHandlers()
         AddHandler _client.Log, AddressOf Logger
         AddHandler _commands.Log, AddressOf Logger
-
         AddHandler _client.MessageReceived, AddressOf CommandHandler
     End Sub
 

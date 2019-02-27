@@ -27,6 +27,7 @@ Namespace Modules
         <[Alias]("whois")>
         <Summary("Displays basic user info")>
         <Remarks("Discord.Net provides various TypeReaders that you can utilize to assist with parsing commands. Example: SocketGuildUser")>
+        <RequireContext(ContextType.Guild)> 'Because the command is accessing Context.Guild.Name we should ensure that the context type is restricted to Guilds
         Public Function UserInfo(Optional ByVal user As SocketGuildUser = Nothing) As Task
             'Context provides access to a host of properties made available from the DiscordSocketClient as the SocketUserMessage
             If user Is Nothing Then user = Context.User 'The user that typed the command
