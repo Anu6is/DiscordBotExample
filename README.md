@@ -1,9 +1,6 @@
 # Discord.Net (Visual Basic) Example Bot
 [![NuGet](https://img.shields.io/nuget/vpre/Discord.Net.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Discord.Net)  
-Visual Basic Example for creating a Discord Bot using [Discord.Net](https://github.com/RogueException/Discord.Net) (2.0.1)
-
-This example guides you through getting your bot online and creating a few simple commands.  
-**IMPORTANT!**: Your bot token needs to be placed in config.json in order for the bot to connect successfully.  
+Visual Basic Example for creating a Discord Bot using [Discord.Net](https://github.com/RogueException/Discord.Net) (2.1.1)
 
 ## Getting Started 
 ### Documentation  
@@ -14,4 +11,4 @@ Nuget Packages:
 - [Discord.Net](https://www.nuget.org/packages/Discord.Net/) 
 - [Microsoft.Extensions.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json/)  
 
-From there, simply follow the [Program.vb](https://github.com/Anu6is/DiscordBotExample/blob/master/DiscordBot/Program.vb) template, to get your bot connected. Additionally, you can take a look at the [SimpleExample](https://github.com/Anu6is/DiscordBotExample/blob/master/DiscordBot/Modules/SimpleExample.vb) Module, to get started with commands.
+From there, simply follow one of the provided example templates, to get your bot connected. Each example includes a command module implementation to help you get started with commands.
