@@ -1,10 +1,11 @@
 ﻿Imports Discord.Commands
 Imports Discord.WebSocket
 
-Namespace Modules
+Namespace Example_1
+
     Public Class SimpleExample
         Inherits ModuleBase(Of SocketCommandContext)
-        'In order to trigger a command, the user must type the prefix (|>) expected by the command handler, followed by the command name or alias. 
+        'In order to trigger a command, the user must type the prefix (|>) expected by the command handler, followed by the command name or alias.
 
         <Command("hi")> 'To execute this command the user needs to enter |>hi
         <[Alias]("hello")> 'alternately, they can use |>hello
@@ -34,6 +35,7 @@ Namespace Modules
             'An alternate way to send a message. Sending a message simply requires an implementation of ITextChannel
             Return Context.Channel.SendMessageAsync($"{user.Username}#{user.Discriminator} joined **{Context.Guild.Name}** on *{user.JoinedAt.Value.ToString("f")}*")
         End Function
-    End Class
-End Namespace
 
+    End Class
+
+End Namespace
