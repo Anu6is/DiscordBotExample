@@ -12,8 +12,6 @@ Namespace Example_1
     Module Program1
         Private _client As DiscordSocketClient
         Private _commands As CommandService
-        Private _config As IConfiguration
-        Private _services As IServiceProvider
 
         Sub Main()
             'Call the Start function and wait until it completes (which should be never)
@@ -21,43 +19,26 @@ Namespace Example_1
         End Sub
 
         Async Function Start() As Task
+            Dim config = BuildConfig()
+
             _client = New DiscordSocketClient()
             _commands = New CommandService()
-            _config = BuildConfig()
-
-            'Set up your Dependency Injection (DI) Container
-            'This is not a requirement and can be ignored if not using DI
-            AddServices()
 
             'Subscribe to desired events
-            AddHandlers()
+            AddEventHandlers()
 
             'Load command modules into the command service. Any Class that inherits from ModuleBase is loaded
             'If you are not using an IServiceProvider, 'Nothing' can be passed in place of Services
-            Await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services)
+            Await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), Nothing) 'See Example 2 for using Dependancy Injection
 
-            Await _client.LoginAsync(TokenType.Bot, _config("token")) 'A valid token must exist in config.json
+            Await _client.LoginAsync(TokenType.Bot, config("token")) 'A valid token must exist in config.json
             Await _client.StartAsync()
 
             'Infinite delay; Keeps the console open and the bot connected
             Await Task.Delay(Timeout.Infinite)
         End Function
 
-        Private Sub AddServices()
-            Dim collection As New ServiceCollection()
-
-            'Basic services
-            collection.AddSingleton(_client)
-            collection.AddSingleton(_commands)
-
-            'Additional services and dependencies that you may require
-            collection.AddSingleton(_config) 'This is not necessary, it's just an example.
-
-            'All additional services should be added above before building
-            _services = collection.BuildServiceProvider()
-        End Sub
-
-        Private Sub AddHandlers()
+        Private Sub AddEventHandlers()
             AddHandler _client.Log, AddressOf Logger
             AddHandler _commands.Log, AddressOf Logger 'Commands.CommandExecuted can be used for more detailed command logging (success and errors)
             AddHandler _client.MessageReceived, AddressOf CommandHandler
@@ -80,7 +61,7 @@ Namespace Example_1
             'HasStringPrefix - checks to see if the message begins with a predefined String
             'HasMentionPrefix - checks to see if the message begins with a predefined user Mention
             If userMessage.HasStringPrefix("|>", pos) OrElse userMessage.HasMentionPrefix(_client.CurrentUser, pos) Then
-                Dim result As IResult = Await _commands.ExecuteAsync(context, pos, _services)
+                Dim result As IResult = Await _commands.ExecuteAsync(context, pos, Nothing)
 
                 'Send a message if the command failed. Excludes sending said message for unknown commands
                 If Not result.IsSuccess AndAlso Not result.ErrorReason = CommandError.UnknownCommand Then

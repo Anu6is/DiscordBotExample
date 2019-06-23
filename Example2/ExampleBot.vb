@@ -23,7 +23,7 @@ Public Class ExampleBot
 
     'Login and connect to Discord
     Private Async Function RunAsync() As Task
-        Using services = ConfigureServices()
+        Using services = ConfigureServices() 'Add required services to the Service Collection
             Dim client = services.GetRequiredService(Of DiscordSocketClient) 'Retrieve your client from the service collection
             services.GetRequiredService(Of LogService) 'Instantiate your logging service
 
