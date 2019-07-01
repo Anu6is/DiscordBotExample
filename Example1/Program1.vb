@@ -5,7 +5,6 @@ Imports Discord
 Imports Discord.Commands
 Imports Discord.WebSocket
 Imports Microsoft.Extensions.Configuration          'Required for ConfigurationBuilder
-Imports Microsoft.Extensions.DependencyInjection    'Required for ServiceCollection
 
 Namespace Example_1
 
@@ -64,7 +63,7 @@ Namespace Example_1
                 Dim result As IResult = Await _commands.ExecuteAsync(context, pos, Nothing)
 
                 'Send a message if the command failed. Excludes sending said message for unknown commands
-                If Not result.IsSuccess AndAlso Not result.ErrorReason = CommandError.UnknownCommand Then
+                If Not result.IsSuccess AndAlso Not result.Error = CommandError.UnknownCommand Then
                     Await userMessage.Channel.SendMessageAsync(result.ErrorReason)
                 End If
 

@@ -59,8 +59,11 @@ Public Class CommandHandler
         'For that reason, the CommandService#CommandExecuted event should be hooked to handle post command execution logic
         'In this example, this is done in the LogService
         If Not result.IsSuccess Then
-            Await context.Message.AddReactionAsync(New Emoji(UNKNOWN_COMMAND))
-            If result.Error <> CommandError.UnknownCommand Then Await context.Channel.SendMessageAsync(result.ErrorReason)
+            If result.Error = CommandError.UnknownCommand Then
+                Await context.Message.AddReactionAsync(New Emoji(UNKNOWN_COMMAND))
+            Else
+                Await context.Channel.SendMessageAsync(result.ErrorReason)
+            End If
         End If
     End Function
 
