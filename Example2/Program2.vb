@@ -1,6 +1,6 @@
 ﻿Module Program2
 
-    Sub Main(args As String())
+    Sub Main()
         ExampleBot.StartAsync().GetAwaiter().GetResult()
     End Sub
 

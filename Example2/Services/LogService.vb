@@ -3,13 +3,7 @@ Imports Discord.Commands
 Imports Discord.WebSocket
 
 Public Class LogService
-    Private ReadOnly Client As DiscordSocketClient
-    Private ReadOnly Commands As CommandService
-
     Public Sub New(client As DiscordSocketClient, commands As CommandService)
-        Me.Client = client
-        Me.Commands = commands
-
         AddHandler client.Log, AddressOf ClientLog
         AddHandler commands.CommandExecuted, AddressOf CommandLog
     End Sub
