@@ -1,6 +1,6 @@
 # Discord.Net (Visual Basic) Example Bot
 [![NuGet](https://img.shields.io/nuget/vpre/Discord.Net.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Discord.Net)  
-Visual Basic Example for creating a Discord Bot using [Discord.Net](https://github.com/RogueException/Discord.Net) (2.1.1)
+Visual Basic Example for creating a Discord Bot using [Discord.Net](https://github.com/RogueException/Discord.Net) (2.2.1)
 
 ## Getting Started 
 ### Documentation  
