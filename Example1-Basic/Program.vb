@@ -8,7 +8,7 @@ Imports Microsoft.Extensions.Configuration          'Required for ConfigurationB
 
 Namespace Example_1
 
-    Module Program1
+    Module Program
         Private _client As DiscordSocketClient
         Private _commands As CommandService
 

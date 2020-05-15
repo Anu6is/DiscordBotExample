@@ -3,7 +3,7 @@ Imports Discord.WebSocket
 
 Namespace Example_1
 
-    Public Class SimpleExample
+    Public Class BasicModule
         Inherits ModuleBase(Of SocketCommandContext)
         'In order to trigger a command, the user must type the prefix (|>) expected by the command handler, followed by the command name or alias.
 

@@ -1,4 +1,4 @@
-## Example 1
+## Example 1 - Basic
 
 This example uses a single class to get your bot online and a second class for the bot's command module.  
 ### Things to note:

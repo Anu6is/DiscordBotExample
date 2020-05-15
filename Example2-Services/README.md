@@ -1,4 +1,4 @@
-## Example 2
+## Example 2 - Services
 
 This example separates the code into services and command modules 
 ### Things to note:

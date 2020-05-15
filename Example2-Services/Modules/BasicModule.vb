@@ -1,7 +1,7 @@
 ﻿Imports Discord
 Imports Discord.Commands
 
-Public Class BasicCommands
+Public Class BasicModule
     Inherits ModuleBase(Of SocketCommandContext)
 
     'Translated from ~> https://gist.github.com/Quahu/13367ed9252eab24c69aea693481e5aa

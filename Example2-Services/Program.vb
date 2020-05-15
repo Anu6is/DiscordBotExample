@@ -1,4 +1,4 @@
-﻿Module Program2
+﻿Module Program
 
     Sub Main()
         ExampleBot.StartAsync().GetAwaiter().GetResult()
